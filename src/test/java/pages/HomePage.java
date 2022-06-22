@@ -24,6 +24,8 @@ public class HomePage extends BasePage {
 
     private final By closeSuggestionButtonBy = By.cssSelector("#wps_popup div div");
 
+    private final By acceptCookiesButtonBy = By.id("didomi-notice-agree-button");
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -65,13 +67,12 @@ public class HomePage extends BasePage {
      */
     @Step("Hover Over Profile icon and click on specific menu option: {0}")
     private void hoverOverProfileIconAndClickOn(By menuItemBy) {
-        WebElement menuItem;
+        waitForVisibilityOf(profileDropDown);
         do {
             hoverOver(profileDropDown);
             profileDropDown.click();
-            menuItem = waitForElementPresenceAndReturnIt(menuItemBy);
-        } while (!waitForElementPresenceAndReturnIt(menuItemBy).isDisplayed());
-        menuItem.click();
+        } while (driver.findElements(menuItemBy).isEmpty());
+        driver.findElement(menuItemBy).click();
     }
 
     /**
@@ -79,7 +80,10 @@ public class HomePage extends BasePage {
      */
     @Step("Accept cookies")
     public void acceptCookies() {
-        waitForVisibilityOf(acceptCookiesButton);
+        defaultImplicitWait();
+        while (driver.findElements(acceptCookiesButtonBy).isEmpty()) {
+            waitForVisibilityOf(acceptCookiesButton);
+        }
         acceptCookiesButton.click();
     }
 

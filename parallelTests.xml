@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel tests" parallel="tests" thread-count="3">
-    <test name="SalesFunnelTestForChrome">
+<suite name="Parallel tests" parallel="tests" verbose="1">
+    <test name="ChromeSignUpTestWithUrlAndProfilePointsVerification" thread-count="1" verbose="1">
         <parameter name="browser" value="Chrome"/>
         <parameter name="headless" value="false"/>
         <classes>
@@ -9,7 +9,7 @@
         </classes>
     </test>
 
-    <test name="SalesFunnelTestForFF">
+    <test name="FFSignUpTestWithUrlAndProfilePointsVerification" thread-count="1" verbose="1">
         <parameter name="browser" value="FireFox"/>
         <parameter name="headless" value="false"/>
         <classes>
@@ -17,7 +17,7 @@
         </classes>
     </test>
 
-    <test name="SalesFunnelTestForEdge">
+    <test name="EdgeSignUpTestWithUrlAndProfilePointsVerification" thread-count="1" verbose="1">
         <parameter name="browser" value="Edge"/>
         <parameter name="headless" value="false"/>
         <classes>

@@ -14,7 +14,7 @@ exercise below.
 3. Enter the necessary details to create a new user
 4. Once you land on the home page after successful registration, hover over the user
    profile icon again and click on My Account from the menu
-5. Validate that you are redirected to https://eu.account.rakuten.com/personalinformation
+5. Validate that you are redirected to https://eu.account.rakuten.com/personal-information
    page.
 6. Verify that the url contains the keywork “personal-information”
 7. Click on Points Activity on the left had side panel.

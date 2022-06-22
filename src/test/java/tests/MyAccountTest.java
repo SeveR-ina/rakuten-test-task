@@ -9,11 +9,7 @@ import pages.PersonalInfoPage;
 import pages.SignUpPage;
 import testData.AccountInfoData;
 import utils.listeners.TestListener;
-
-import static net.andreinc.mockneat.types.enums.PassStrengthType.STRONG;
-import static net.andreinc.mockneat.unit.user.Emails.emails;
-import static net.andreinc.mockneat.unit.user.Names.names;
-import static net.andreinc.mockneat.unit.user.Passwords.passwords;
+import static testData.UserGenerator.getRandomUser;
 
 /**
  * Main test class with checking registration, profile url and points.
@@ -57,17 +53,20 @@ public class MyAccountTest extends BasicTest {
         quitDriver();
     }
 
-    @Test(dataProvider = "objectTestData",
-            description = "Verify successful registration," +
-                    "/personal-information url and zero points include zeros.")
+    @Test(description = "Verify successful registration," +
+            "/personal-information url and zero points include zeros.", threadPoolSize = 6)
     @Severity(SeverityLevel.CRITICAL)
     @Story("Story : Verify the sign up and account page functionality")
-    public void checkRegistrationAndPersonalInfoURLAndPoints(AccountInfoData accData) {
+    public void checkRegistrationAndPersonalInfoURLAndPoints() {
+
+        //Create test data object
+        String domain = testProperties.getProperty("domain");
+        AccountInfoData accData = getRandomUser(domain);
 
         homePage.goToSignUpPage();
         SignUpPage signUpPage = new SignUpPage(driver);
 
-        //Create a new user
+        //Register a new user
         signUpPage.fillRegisterForm(accData.getFirstName(), accData.getLastName(),
                 accData.getEmail(), accData.getPass());
         signUpPage.completeRegistration();
@@ -104,20 +103,5 @@ public class MyAccountTest extends BasicTest {
         String actualPendingPoints = cashbackAndRewardsPage.getValueOfPendingPoints();
         Assert.assertEquals(actualPendingPoints, defaultPointsValue,
                 "Actual pending points ... " + actualPendingPoints + " don't equal " + defaultPointsValue);
-    }
-
-    /**
-     * Provides a test data via 'AccountInfoData' class and power of 'mockneat' dependency.
-     */
-    @DataProvider(name = "objectTestData")
-    public Object[][] provideRegistrationTestData() {
-        String domain = testProperties.getProperty("domain");
-        AccountInfoData accInfo = AccountInfoData.builder()
-                .email(emails().domain(domain).get())
-                .firstName(names().first().get())
-                .lastName(names().last().get())
-                .pass(passwords().type(STRONG).get())
-                .build();
-        return new Object[][]{{accInfo}};
     }
 }

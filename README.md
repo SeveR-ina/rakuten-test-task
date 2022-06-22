@@ -9,8 +9,7 @@ Test classes :
 Linear tests :
 
 - linearTests.xml;
-- linearHeadlessTests.xml.
 
 Parallel tests :
 
-- parallelHeadlessTests.xml.
+- parallelTests.xml.

@@ -52,9 +52,8 @@
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <parallel>tests</parallel>
-                    <threadCount>3</threadCount>
                     <suiteXmlFiles>
-                        <suiteXmlFile>parallelHeadlessTests.xml</suiteXmlFile>
+                        <suiteXmlFile>parallelTests.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
