@@ -21,7 +21,7 @@ import java.util.Properties;
  * works with properties and capabilities, manages drivers.
  */
 public abstract class BasicTest {
-    protected WebDriver driver;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     private final static String TEST_PROPERTIES_PATH = "./src/test/resources/test.properties";
     protected Properties testProperties;
@@ -34,12 +34,12 @@ public abstract class BasicTest {
     protected void doPreparationsFor(String browser, boolean headless) {
         createAndSetCapabilities(browser);
         uploadDriverAndInitializeBaseDriver(browser, headless);
-        driver.get(testProperties.getProperty("homeURL"));
+        driver.get().get((testProperties.getProperty("homeURL")));
         manageDriver();
     }
 
-    public WebDriver getDriver() {
-        return driver;
+    public static WebDriver getDriver() {
+        return driver.get();
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class BasicTest {
      * Quits this driver and closes its window.
      */
     protected void quitDriver() {
-        driver.quit();
+        driver.get().quit();
     }
 
     /**
@@ -105,10 +105,10 @@ public abstract class BasicTest {
      * Maximizes the window, waits, and deletes cookies.
      */
     private void manageDriver() {
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(
+        driver.get().manage().window().maximize();
+        driver.get().manage().timeouts().implicitlyWait(
                 Duration.ofSeconds(TimeOuts.DEFAULT_TIMEOUT_IN_SECONDS.getTimeOutValue()));
-        driver.manage().deleteAllCookies();
+        driver.get().manage().deleteAllCookies();
     }
 
     /**
@@ -122,7 +122,7 @@ public abstract class BasicTest {
         if (headless) {
             options.addArguments("--headless");
         }
-        driver = new ChromeDriver(options);
+        driver.set(new ChromeDriver(options));
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class BasicTest {
         if (headless) {
             options.addArguments("--headless");
         }
-        driver = new EdgeDriver(options);
+        driver.set(new EdgeDriver(options));
     }
 
     /**
@@ -150,6 +150,6 @@ public abstract class BasicTest {
         if (headless) {
             options.addArguments("--headless");
         }
-        driver = new FirefoxDriver(options);
+        driver.set(new FirefoxDriver(options));
     }
 }

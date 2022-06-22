@@ -51,9 +51,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
-                    <parallel>tests</parallel>
+                    <!--                    <parallel>tests</parallel>-->
                     <suiteXmlFiles>
-                        <suiteXmlFile>parallelTests.xml</suiteXmlFile>
+                        <suiteXmlFile>linearTests.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

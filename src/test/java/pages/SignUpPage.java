@@ -37,6 +37,7 @@ public class SignUpPage extends BasePage {
      */
     @Step("Fill a registration form with the test data: {firstName}, {lastName} and {email} / {pass}")
     public void fillRegisterForm(String firstName, String lastName, String email, String pass) {
+        waitForVisibilityOf(firstNameInput);
         sendKeys(firstNameInput, firstName);
         sendKeys(lastNameInput, lastName);
         sendKeys(emailInput, email);
