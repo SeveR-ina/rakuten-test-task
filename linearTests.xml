@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Linear tests">
+    <test name="SalesFunnelTestForChrome">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="tests.MyAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="SalesFunnelTestForFireFox">
+        <parameter name="browser" value="FireFox"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="tests.MyAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="SalesFunnelTestForEdge">
+        <parameter name="browser" value="Edge"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="tests.MyAccountTest"/>
+        </classes>
+    </test>
+</suite>
