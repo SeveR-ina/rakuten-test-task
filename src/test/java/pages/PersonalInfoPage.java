@@ -15,6 +15,9 @@ public class PersonalInfoPage extends BasePage {
     @FindBy(id = "lastName")
     private WebElement lastNameInput;
 
+    @FindBy(css = "div[data-qa-id='header-email']")
+    private WebElement fullNameOnHeader;
+
     public PersonalInfoPage(WebDriver driver) {
         super(driver);
     }
@@ -42,5 +45,14 @@ public class PersonalInfoPage extends BasePage {
     @Step("Get Last name from disabled input on Personal Information tab")
     public String getLastName() {
         return lastNameInput.getAttribute("value");
+    }
+
+    /**
+     * Gets text of full name on the header.
+     */
+    @Step("Get full name on the header of Personal Information page")
+    public String getFullName() {
+        waitForVisibilityOf(fullNameOnHeader);
+        return fullNameOnHeader.getText();
     }
 }

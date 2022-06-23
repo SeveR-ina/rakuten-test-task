@@ -50,11 +50,12 @@ public class MyAccountTest extends BasicTest {
         openHomePageAndCloseAllPopUps();
     }
 
-    @AfterSuite
+    @AfterMethod
     public void closeBrowser() {
         quitDriver();
     }
 
+    @Ignore
     @Test(description = "Verify /personal-information url and " +
             "account points include zeros after registration.")
     @Severity(SeverityLevel.CRITICAL)
@@ -89,19 +90,20 @@ public class MyAccountTest extends BasicTest {
         CashbackAndRewardsPage cashbackAndRewardsPage = new CashbackAndRewardsPage(driver.get());
 
         String actualAvailablePoints = cashbackAndRewardsPage.getValueOfAvailablePoints();
-        String defaultPointsValue = testProperties.getProperty("defaultPointsValue");
+        String expectedDefaultPoints = testProperties.getProperty("defaultPointsValue");
 
         //Assert the Available points:
-        Assert.assertEquals(actualAvailablePoints, defaultPointsValue,
-                "Actual available points ... " + actualAvailablePoints + " don't equal " + defaultPointsValue);
+        Assert.assertEquals(actualAvailablePoints, expectedDefaultPoints,
+                "Actual available points ... " + actualAvailablePoints + " don't equal " + expectedDefaultPoints);
 
         String actualPendingPoints = cashbackAndRewardsPage.getValueOfPendingPoints();
 
         //Assert the Pending points:
-        Assert.assertEquals(actualPendingPoints, defaultPointsValue,
-                "Actual pending points ... " + actualPendingPoints + " don't equal " + defaultPointsValue);
+        Assert.assertEquals(actualPendingPoints, expectedDefaultPoints,
+                "Actual pending points ... " + actualPendingPoints + " don't equal " + expectedDefaultPoints);
     }
 
+    @Ignore
     @Test(description = "Verify First and Last name after registration")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Story : Verify, that after registration, user has the same First and Last name.")
@@ -116,21 +118,47 @@ public class MyAccountTest extends BasicTest {
 
         PersonalInfoPage personalInfoPage = new PersonalInfoPage(driver.get());
 
-        String firstNameAfterRegistration = personalInfoPage.getFirstName();
-        String usersFirstNameDuringRegistration = accData.getFirstName();
+        String actualFirstName = personalInfoPage.getFirstName();
+        String expectedFirstName = accData.getFirstName();
 
         //Assert if user's first name after registration equal user's first name during a registration
-        Assert.assertEquals(firstNameAfterRegistration, usersFirstNameDuringRegistration,
-                "Actual First name of user ... " + firstNameAfterRegistration +
-                        " doesn't equal " + usersFirstNameDuringRegistration);
+        Assert.assertEquals(actualFirstName, expectedFirstName,
+                "Actual First name of user ... " + actualFirstName +
+                        " doesn't equal " + expectedFirstName);
 
-        String lastNameAfterRegistration = personalInfoPage.getLastName();
-        String usersLastNameDuringRegistration = accData.getLastName();
+        String actualLastName = personalInfoPage.getLastName();
+        String expectedLastName = accData.getLastName();
 
         //Assert if user's last name after registration equal user's last name during a registration
-        Assert.assertEquals(lastNameAfterRegistration, usersLastNameDuringRegistration,
-                "Actual Last name of user ... " + lastNameAfterRegistration +
-                        " doesn't equal " + usersLastNameDuringRegistration);
+        Assert.assertEquals(actualLastName, expectedLastName,
+                "Actual Last name of user ... " + actualLastName +
+                        " doesn't equal " + expectedLastName);
+    }
+
+    @Test(description = "Verify Full name of user after registration")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Story : Verify, that after registration, " +
+            "user has the same full name as on the header of Personal Information page.")
+    public void checkFullNameAfterRegistration() {
+
+        createNewUser();
+
+        homePage.rejectNotificationsIfVisible();
+
+        //Go to the Account section:
+        homePage.goToAccountPage();
+
+        PersonalInfoPage personalInfoPage = new PersonalInfoPage(driver.get());
+
+        String actualFullName = personalInfoPage.getFullName();
+        String expectedFullName = accData.getFirstName() +
+                " " + accData.getLastName();
+        expectedFullName = expectedFullName.toUpperCase();
+
+        //Assert if user's full name after registration equals user's full name during a registration
+        Assert.assertEquals(actualFullName, expectedFullName,
+                "Actual Full name of user ... " + actualFullName +
+                        " doesn't equal " + expectedFullName);
     }
 
     private void openHomePageAndCloseAllPopUps() {
