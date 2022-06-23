@@ -1,10 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * User registration page of a web-site.
+ */
 public class SignUpPage extends BasePage {
 
     @FindBy(css = "input[aria-label='First name']")
@@ -28,6 +32,8 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "//div[@role='button']/div[contains(text(),'registration')]")
     private WebElement completeRegistrationButton;
 
+    private final By firstNameInputBy = By.cssSelector("input[aria-label='First name']");
+
     public SignUpPage(WebDriver driver) {
         super(driver);
     }
@@ -37,7 +43,10 @@ public class SignUpPage extends BasePage {
      */
     @Step("Fill a registration form with the test data: {firstName}, {lastName} and {email} / {pass}")
     public void fillRegisterForm(String firstName, String lastName, String email, String pass) {
-        waitForVisibilityOf(firstNameInput);
+        defaultImplicitWait();
+        while (driver.findElements(firstNameInputBy).isEmpty()) {
+            waitForVisibilityOf(firstNameInput);
+        }
         sendKeys(firstNameInput, firstName);
         sendKeys(lastNameInput, lastName);
         sendKeys(emailInput, email);

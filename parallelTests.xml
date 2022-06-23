@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel tests" parallel="methods" verbose="1">
-    <test name="ChromeSignUpTestWithUrlAndProfilePointsVerification" thread-count="2" verbose="1">
+<suite name="Parallel tests" parallel="tests" verbose="1" thread-count="2">
+    <test name="ChromeAccTestsAfterRegistration" thread-count="3" verbose="1">
         <parameter name="browser" value="Chrome"/>
         <parameter name="headless" value="false"/>
         <classes>
@@ -9,7 +9,8 @@
         </classes>
     </test>
 
-    <test name="FFSignUpTestWithUrlAndProfilePointsVerification" thread-count="2" verbose="1">
+    <!-- TODO: fix parallel execution for FireFox browser -->
+    <test name="FFAccTestsAfterRegistration" thread-count="3" verbose="1" enabled="false">
         <parameter name="browser" value="FireFox"/>
         <parameter name="headless" value="false"/>
         <classes>
@@ -17,7 +18,7 @@
         </classes>
     </test>
 
-    <test name="EdgeSignUpTestWithUrlAndProfilePointsVerification" thread-count="2" verbose="1">
+    <test name="EdgeAccTestsAfterRegistration" thread-count="3" verbose="1">
         <parameter name="browser" value="Edge"/>
         <parameter name="headless" value="false"/>
         <classes>

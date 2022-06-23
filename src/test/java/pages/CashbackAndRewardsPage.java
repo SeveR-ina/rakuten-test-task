@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Page 'Cashback and Points' from My Account section of a web-site.
+ */
 public class CashbackAndRewardsPage extends BasePage {
 
     @FindBy(css = "span[data-qa-id='rewards-banner-points-amount-left-side']")

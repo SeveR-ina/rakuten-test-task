@@ -1,11 +1,12 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Home page of a web-site.
+ */
 public class HomePage extends BasePage {
     @FindBy(css = "div[data-qa-id='profile-dropdown']")
     private WebElement profileDropDown;
@@ -13,7 +14,7 @@ public class HomePage extends BasePage {
     @FindBy(id = "didomi-notice-agree-button")
     private WebElement acceptCookiesButton;
 
-    @FindBy(css = "#wps_popup div div")
+    @FindBy(css = "#wps_popup div[aria-label='close']")
     private WebElement closeSuggestionButton;
 
     @FindBy(id = "emarsys-consent-cancel")
@@ -22,7 +23,7 @@ public class HomePage extends BasePage {
     private final By registerButtonBy = By.id("nav-header-register");
     private final By myAccountItemBy = By.cssSelector("div[data-qa-id='profile-dropdown-link-row1-0']");
 
-    private final By closeSuggestionButtonBy = By.cssSelector("#wps_popup div div");
+    private final By closeSuggestionButtonBy = By.cssSelector("#wps_popup div[aria-label='close']");
 
     private final By acceptCookiesButtonBy = By.id("didomi-notice-agree-button");
 
@@ -41,9 +42,9 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * Goes to the Account page.
+     * Goes to the Personal Information page.
      */
-    @Step("Go to Account page")
+    @Step("Go to Personal information page by clicking on 'My Account'")
     public void goToAccountPage() {
         defaultImplicitWait();
         waitForVisibilityOf(profileDropDown);
@@ -93,7 +94,7 @@ public class HomePage extends BasePage {
     @Step("Close pop-up")
     public void closeSuggestion() {
         defaultImplicitWait();
-        while (!waitForElementPresenceAndReturnIt(closeSuggestionButtonBy).isDisplayed()) {
+        while (driver.findElements(closeSuggestionButtonBy).isEmpty()) {
             waitForVisibilityOf(closeSuggestionButton);
         }
         closeSuggestionButton.click();

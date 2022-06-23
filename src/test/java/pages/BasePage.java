@@ -13,7 +13,7 @@ import utils.TimeOuts;
 import java.time.Duration;
 
 /**
- * Parent page for all pages includes initing elements on the page and waiting for elements.
+ * Parent page for all pages, includes methods for working with elements.
  */
 abstract class BasePage {
     protected WebDriver driver;

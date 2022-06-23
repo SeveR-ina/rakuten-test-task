@@ -134,7 +134,7 @@ public class MyAccountTest extends BasicTest {
     }
 
     @Test(description = "Verify Full name of user after registration")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Story : Verify, that after registration, " +
             "user has the same full name as on the header of Personal Information page.")
     public void checkFullNameAfterRegistration() {
@@ -159,6 +159,9 @@ public class MyAccountTest extends BasicTest {
                         " doesn't equal " + expectedFullName);
     }
 
+    /**
+     * Goes to Home page, accepts cookies and closes visible pop-ups.
+     */
     private void openHomePageAndCloseAllPopUps() {
         homePage = new HomePage(driver.get());
 
@@ -167,6 +170,9 @@ public class MyAccountTest extends BasicTest {
         homePage.closeSuggestion();
     }
 
+    /**
+     * Goes to Sign up page, creates new random user.
+     */
     private void createNewUser() {
         //Create test data object
         String domain = testProperties.getProperty("domain");

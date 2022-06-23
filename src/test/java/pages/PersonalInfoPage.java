@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Page 'Personal Information' from My Account section of a web-site.
+ */
 public class PersonalInfoPage extends BasePage {
     @FindBy(css = "a[data-qa-id='side-menu-cashbackAndPoints']")
     private WebElement cashbackAndPointsItem;
@@ -50,7 +53,7 @@ public class PersonalInfoPage extends BasePage {
     /**
      * Gets text of full name on the header.
      */
-    @Step("Get full name on the header of Personal Information page")
+    @Step("Get Full name on the header of Personal Information page")
     public String getFullName() {
         waitForVisibilityOf(fullNameOnHeader);
         return fullNameOnHeader.getText();

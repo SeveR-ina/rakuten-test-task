@@ -21,6 +21,7 @@ import java.util.Properties;
  * works with properties and capabilities, manages drivers.
  */
 public abstract class BasicTest {
+    //ThreadLocal driver for running test methods in parallel
     protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     private final static String TEST_PROPERTIES_PATH = "./src/test/resources/test.properties";
