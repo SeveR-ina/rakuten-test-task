@@ -55,7 +55,6 @@ public class MyAccountTest extends BasicTest {
         quitDriver();
     }
 
-    @Ignore
     @Test(description = "Verify /personal-information url and " +
             "account points include zeros after registration.")
     @Severity(SeverityLevel.CRITICAL)
@@ -103,7 +102,6 @@ public class MyAccountTest extends BasicTest {
                 "Actual pending points ... " + actualPendingPoints + " don't equal " + expectedDefaultPoints);
     }
 
-    @Ignore
     @Test(description = "Verify First and Last name after registration")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Story : Verify, that after registration, user has the same First and Last name.")
