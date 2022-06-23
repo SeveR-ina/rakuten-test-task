@@ -28,5 +28,6 @@ Java 11 + Selenium + TestNG + PageObject + Lombok + Maven + Allure report.
 
 --------------------------------------
 
-Allure report allows seeing the manual test cases (& steps) as a solution for the 'Non-Coding Exercise'. 
-We should run all automated tests via Maven in the 'master-plus-additional-task' branch. For Allure instructions check ALLURE.md file.
+Allure report allows seeing the manual test cases (& steps) as a solution for the 'Non-Coding Exercise'.
+We should run all automated tests via Maven in the 'master-plus-additional-task' branch. For Allure instructions check
+ALLURE.md file.
