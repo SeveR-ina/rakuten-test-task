@@ -14,4 +14,7 @@ For ability to see report in directory: target/site/allure-maven-plugin/index.ht
 - mvn allure:report
 
 Test cases are shown on "Suites" tab.
-Test details can be reached via clicking on corresponded test row. 
+Test details can be reached via clicking on corresponded test row.
+
+PS: For ability to see Allure categories in the report, we should put 'categories.json' file after 'mvn clean test'
+step, but before 'mvn allure:serve'.

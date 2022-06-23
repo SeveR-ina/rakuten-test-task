@@ -16,7 +16,7 @@ public class PersonalInfoPage extends BasePage {
     /**
      * Open Cash and Points page in the Account section.
      */
-    @Step("Clicks on 'Cash and Points' on the left side panel")
+    @Step("Click on 'Cash and Points' on the left side panel")
     public void openCashAndPointsPage() {
         waitForVisibilityOf(cashbackAndPointsItem);
         cashbackAndPointsItem.click();
